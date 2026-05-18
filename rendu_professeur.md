@@ -26,7 +26,7 @@ Le cadre de la gestion de projet demandé est préparé pour GitLab :
 - Preuve de build : le projet a été compilé et l’image Docker construite avec succès sans erreur.
 
 ## 6. Test local
-- Commande locale de lancement : `docker run -p 4000:8080 issamdevops`
+- Commande locale de lancement : `docker run -p 4000:8080 issou7756/devops-cloudnative:latest`
 - Service visible sur `http://localhost:4000`
 - Réponse attendue : message `Hello`
 
@@ -46,7 +46,7 @@ Il effectue :
 - checkout du code ;
 - installation du JDK 21 ;
 - exécution de `./gradlew test` dans `MyService` ;
-- build Docker de l’image `myservice:latest`.
+- build Docker de l’image `myservice:latest` dans le workflow GitHub Actions.
 
 > Dans cet environnement, la CLI `gh` n’est pas installée, donc le statut de PR et des checks ne peut pas être récupéré automatiquement ici.
 
