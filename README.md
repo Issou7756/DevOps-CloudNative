@@ -238,3 +238,13 @@ Les tests web sont exécutés de la même façon que les tests unitaires :
 
 Les résultats incluent à la fois les tests unitaires JUnit ET les tests MockMvc.
 
+
+## Test Pull Request
+
+Cette branche permet de tester le fonctionnement d’une Pull Request et le déclenchement automatique de la CI/CD avec GitHub Actions.
+
+L’application a été buildée sous forme d’image Docker, lancée localement sur le port 4000, puis publiée sur Docker Hub.
+
+git add .
+git commit -m "Ajout test pull request et documentation Docker"
+git push -u origin newcarservice
