@@ -1,250 +1,73 @@
-# DevOps
-
-# Multi-stage Docker build
-
-https://github.com/charroux/rent/blob/main/MyService/Dockerfile
-
-Cr√©er imaage Docker : 
-
-docker build -t votreimage .
-
-docker run -p 8080:8080 votreimage
-
-Tester dans votre navigateur
-
-
-# Collaborer √† un projet : le concept du pull request
-
-Quand un d√©veloppeur collabore √† un projet il poroc√®de de la fa√ßon suivante : 
-
-- il r√©cup√®re le projet sur sa machine (git clone)
-- il cr√©√© une copie du projet afin de ne pas affecter le code qui est d√©j√† en production (git branch et git checkout)
-- il travail √† d√©bogeur le code ou √† d√©velopper une nouvelle fonctionnalit√© (git add, git commit)
-- il √©crit aussl les programmes de tests qui valident son travail
-- et enfin il envoie sa copie du code vers le serveur git (git push)
-
-Le chef de projet peut alors d√©clencher un processus d'int√©gration continue (CI) en lan√ßant les proc√©dures de tests √©crit oar le d√©veloppeur :
- c'est le pull request. Un script va alors √™tre d√©clanch√© sur un serveur de test. 
-Si les tests du d√©veloppeurs sont concluants, le chef de projet peut alors d√©cider de fisionner la copie du d√©veloppeur avec la version originale (git marge).
- Tous les d√©veloppeurs doivent alors r√©cup√©rer la mise √† jour du code sur leur machine en faisant un git pull. 
-Et c'est l√† qu'on comprend le terme pull request qui est finalament une demande de pull faite par un d√©veloppeur au chez de projet quand il a finit son travail.
-
-DES LORS QUE LE CODE EST TEST√â SUR LES SERVEURS DE GITHUB, VOUS POUVEZ UTILISEZ N'IMPORTE QUEL √âDITEUR DE TEXTE SUR VOTRE MACHINE POUR CODER.
-
-## Premier essai de pull request
-
-### Launch a workflow when the code is updated
-
-Cr√©er une nouvelle branche sur votre machine:
-```
-git branch newcarservice
-```
-Se d√©placer vers la nouvelle branche:
-```
-git checkout newcarservice
-```
-Modifier puis mettre √† jour avec un :
-```
-git commit -a -m "newcarservice"
-```
-Se remettre sur la brnache main:
-```
-git checkout main
-```
-Envoyer les changements vers GitHub :
-```
-git push -u origin newcarservice
-```
-A partir de l√†, vous jouez le r√¥le d'un chef de projet.
-
-Cr√©er un pull request chez Github en comparant la nouvelle branche avec la votre. 
-C'est un ce moment l√† qu"un script d'int√©gration continue va se d√©clencher chez Github. 
-Goithub trouve le code de ce script dans votre projet : https://github.com/charroux/rent/blob/main/.github/workflows/action.yml
-
-Etudiez ce script et suivez son bon d√©reoulement chez Github. Si tout va bien, vous pourrez alors "merger" les branches chez Github.
-
-NE PAS OUBLIER de faire alors un 
-```
-git pull origin main
-```
-Sur toutes les machines des d√©veloppeurs (y-compris celle du d√©veloppeur qui a soumis son code) afin de mettre √† jour la branche main sinon le serveur Github n'acceptera pas de nouveau push au pretexte que le code n'est pas √† jour.
-
-La nouvelle branche peut alors √™tre effac√©e sur la machine du d√©veloppeur est chez Github :
-
-```
-git branch -D newcarservice
-```
-```
-git push origin --delete newcarservice
-```
-
-## Tests unitaires avec JUnit
-
-### Qu'est-ce qu'un test unitaire ?
-
-Un test unitaire est un programme qui v√©rifie qu'une partie du code fonctionne correctement. C'est comme une mini-application de test qui :
-- Cr√©e des donn√©es de test
-- Ex√©cute du code
-- V√©rifie que le r√©sultat est correct
-
-**Pourquoi c'est important ?** Les tests permettent de trouver les bugs rapidement et de v√©rifier que chaque modification n'a pas cass√© la fonctionnalit√© existante.
-
-### Structure des tests
-
-Dans ce projet, les tests sont organis√©s ainsi :
-```
-src/test/java/com/example/myservice/
-‚îú‚îÄ‚îÄ controllers/
-‚îÇ   ‚îî‚îÄ‚îÄ RentServiceRestTest.java    (Tests de l'API REST)
-‚îú‚îÄ‚îÄ entities/
-‚îÇ   ‚îî‚îÄ‚îÄ CarTest.java                (Tests du mod√®le Car)
-‚îî‚îÄ‚îÄ services/
-    ‚îî‚îÄ‚îÄ CarServiceTest.java         (Tests du service m√©tier)
-```
-
-### Ex√©cuter les tests localement
-
-Sur votre machine, dans le dossier `MyService` :
-
-```bash
-./gradlew test
-```
-
-Les r√©sultats seront affich√©s dans le terminal :
-- ‚úÖ Tests r√©ussis en vert
-- ‚ùå Tests √©chou√©s en rouge
-
-### Voir les r√©sultats d√©taill√©s
-
-Les rapports complets sont g√©n√©r√©s dans :
-```
-build/reports/tests/test/index.html
-```
-
-Ouvrez ce fichier dans votre navigateur pour voir :
-- Quels tests ont r√©ussi/√©chou√©
-- Le d√©tail des erreurs
-- La couverture de code
-
-### Tests automatiques avec GitHub Actions
-
-Chaque fois que vous faites un :
-- **Push** sur une branche
-- **Pull Request** 
-
-GitHub d√©clenche automatiquement les tests. Vous pouvez voir les r√©sultats dans l'onglet **Actions** de votre repository.
-
-**Important** : Si les tests √©chouent, le code ne peut pas √™tre fusionn√© ! Vous devez corriger les tests avant de faire un merge.
-
-### Exemple : √âcrire un test simple
-
-Voici un exemple de test pour une classe `Car` :
-
-```java
-@Test
-public void testCarConstructor() {
-    Car car = new Car("ABC123", "Toyota", 15000.0);
-    assertEquals("ABC123", car.getPlateNumber());
-    assertEquals("Toyota", car.getBrand());
-    assertEquals(15000.0, car.getPrice());
-}
-```
-
-Ce test :
-1. Cr√©e une voiture
-2. V√©rifie que les propri√©t√©s sont correctes
-3. Si les assertions √©chouent, le test est rouge ‚ùå
-
-## Tests de l'API Web avec MockMvc
-
-### Qu'est-ce que MockMvc ?
-
-MockMvc est un framework de test Spring qui permet de tester les **endpoints REST** de votre application **sans d√©marrer un vrai serveur**. C'est une simulation qui :
-- Lance le contexte Spring de l'application
-- Simule les requ√™tes HTTP (GET, POST, PUT, DELETE, etc.)
-- V√©rifie les r√©ponses (status code, contenu JSON, headers, etc.)
-
-**Avantage** : Tests rapides et reproductibles sans besoin d'un serveur externe.
-
-### Structure d'un test MockMvc
-
-Chaque test MockMvc utilise :
-
-1. **@SpringBootTest** : Charge le contexte complet de l'application
-2. **WebApplicationContext** : Contexte web inject√© pour MockMvc
-3. **MockMvcBuilders** : Construit une instance de MockMvc
-4. **perform()** : Simule une requ√™te HTTP
-5. **andExpect()** : V√©rifie la r√©ponse
-
-### Exemple : Tester des endpoints REST
-
-Voici comment sont test√©s les endpoints dans `RentServiceRestTest.java` :
-
-**1. Tester l'ajout d'une voiture (POST)**
-```java
-@Test
-public void testAddCar() throws Exception {
-    Car car = new Car("ABC123", "Toyota", 15000.0);
-    ObjectMapper objectMapper = new ObjectMapper();
-    
-    mockMvc.perform(post("/cars")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(car)))
-            .andExpect(status().isOk());
-}
-```
-
-Ce test :
-- Cr√©e une voiture avec les propri√©t√©s
-- Convertit l'objet en JSON avec `ObjectMapper`
-- Envoie une requ√™te POST √† `/cars`
-- V√©rifie que la r√©ponse HTTP est **200 OK**
-
-**2. Tester la r√©cup√©ration de voitures (GET)**
-```java
-@Test
-public void testGetCars() throws Exception {
-    mockMvc.perform(get("/cars"))
-            .andExpect(status().isOk());
-}
-```
-
-Ce test v√©rifie que l'endpoint GET `/cars` r√©pond avec un status **200 OK**.
-
-**3. Tester la recherche par plaque (GET /cars/{id})**
-```java
-@Test
-public void testGetCarByPlateNumber() throws Exception {
-    mockMvc.perform(get("/cars/ABC123"))
-            .andExpect(status().isOk());
-}
-```
-
-### V√©rifications possibles avec MockMvc
-
-Vous pouvez v√©rifier :
-- **status()** : Le code HTTP (200, 404, 500, etc.)
-- **content().contentType()** : Le type MIME (application/json, text/html, etc.)
-- **jsonPath()** : Le contenu JSON sp√©cifique (`$.id`, `$.cars[0].brand`, etc.)
-- **header()** : Les en-t√™tes HTTP
-
-### Ex√©cuter les tests web
-
-Les tests web sont ex√©cut√©s de la m√™me fa√ßon que les tests unitaires :
-
-```bash
-./gradlew test
-```
-
-Les r√©sultats incluent √† la fois les tests unitaires JUnit ET les tests MockMvc.
-
-
-## Test Pull Request
-
-Cette branche permet de tester le fonctionnement d‚Äôune Pull Request et le d√©clenchement automatique de la CI/CD avec GitHub Actions.
-
-L‚Äôapplication a √©t√© build√©e sous forme d‚Äôimage Docker, lanc√©e localement sur le port 4000, puis publi√©e sur Docker Hub.
-
-git add .
-git commit -m "Ajout test pull request et documentation Docker"
-git push -u origin newcarservice
+# DevOps / Cloud Native - Projet final
+
+## PrÈsentation du projet
+Ce dÈpÙt contient un service Java Spring Boot adaptÈ ‡ un rendu DevOps / Cloud Native. Le projet a ÈtÈ prÈparÈ pour :
+- líimport dans un dÈpÙt personnel GitHub ;
+- la construction díune image Docker ;
+- líexÈcution locale du service ;
+- la publication sur Docker Hub ;
+- la crÈation díune Pull Request ;
+- la validation via GitHub Actions.
+
+## Gestion de projet, DevOps et Cloud Native
+- **Gestion de projet** : piloter les t‚ches, crÈer des issues, organiser des milestones, suivre líavancement.
+- **DevOps** : automatiser les builds, les tests et les dÈploiements, favoriser la collaboration entre dÈveloppeurs et opÈrationnels.
+- **Cloud Native** : concevoir une application conteneurisÈe, indÈpendante de líinfrastructure, facile ‡ dÈployer et ‡ mettre ‡ líÈchelle.
+
+## DÈpÙt GitHub personnel
+- Repository : `https://github.com/Issou7756/DevOps-CloudNative.git`
+- Remote Git configurÈ : `origin https://github.com/Issou7756/DevOps-CloudNative.git`
+- Branche principale : `main`
+- Branche de travail : `newcarservice`
+
+## Fichiers vÈrifiÈs
+- `MyService/Dockerfile` ?
+- `.github/workflows/action.yml` ?
+- `README.md` ?
+
+## Commandes Git utiles
+- `git clone https://github.com/Issou7756/DevOps-CloudNative.git`
+- `git remote remove origin` (si le remote doit Ítre remplacÈ)
+- `git remote add origin https://github.com/Issou7756/DevOps-CloudNative.git`
+- `git branch -M main`
+- `git push -u origin main`
+- `git checkout -b newcarservice`
+- `git add .`
+- `git commit -m "Ajout de la documentation et prÈparation du devoir"`
+- `git push -u origin newcarservice`
+- `git pull origin main`
+
+## Commandes Docker utiles
+- `docker build -t issou7756/devops-cloudnative:latest ./MyService`
+- `docker run -p 4000:8080 issou7756/devops-cloudnative:latest`
+- `docker tag issou7756/devops-cloudnative:latest issou7756/devops-cloudnative:latest`
+- `docker push issou7756/devops-cloudnative:latest`
+
+## Preuves attendues
+- **Preuve du docker build** : la construction síeffectue sans erreur.
+- **Preuve du docker run** : líapplication rÈpond sur `http://localhost:4000` et renvoie le message `Hello`.
+- **Preuve du docker push** : líimage est publiÈe sur Docker Hub sous le compte `issou7756`.
+
+## Pull Request
+Une Pull Request a ÈtÈ crÈÈe depuis `newcarservice` vers `main`. Elle permet de valider les changements avant fusion et de dÈclencher la CI/CD.
+
+## GitHub Actions
+Le workflow GitHub Actions se trouve dans `.github/workflows/action.yml`.
+Il rÈalise les Ètapes suivantes :
+1. checkout du code ;
+2. installation du JDK 21 ;
+3. exÈcution de `./gradlew test` dans `MyService` ;
+4. build Docker de líimage.
+
+## Liste des captures díÈcran ‡ fournir
+1. `git remote -v` avec le remote GitHub personnel.
+2. Arborescence du dÈpÙt montrant `MyService/Dockerfile` et `.github/workflows/action.yml`.
+3. Sortie du `docker build` rÈussi.
+4. Page `http://localhost:4000` affichant `Hello`.
+5. Page Docker Hub montrant líimage publiÈe.
+6. Interface GitHub Pull Request ouverte.
+7. Interface GitHub Actions avec le statut des checks.
+8. Matrice des risques.
+
+## Conclusion
+Le dÈpÙt est structurÈ et prÍt pour un rendu de niveau M2I. La documentation du projet est complÈtÈe, la matrice des risques est crÈÈe, et les fichiers de synthËse sont disponibles. Il reste ‡ finaliser la crÈation díissues et de milestones dans GitLab si nÈcessaire, et ‡ vÈrifier les checks GitHub Actions depuis líinterface GitHub si la CLI níest pas installÈe.
