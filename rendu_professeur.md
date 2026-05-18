@@ -18,7 +18,7 @@ Le cadre de la gestion de projet demandé est préparé pour GitLab :
 - Dépôt personnel : `https://github.com/Issou7756/DevOps-CloudNative.git`
 - Remote configuré : `origin https://github.com/Issou7756/DevOps-CloudNative.git`
 - Branche principale : `main`
-- Pull Request existante : `newcarservice` vers `main`.
+- Pull Request existante : `newcarservice-docs` vers `main`.
 
 ## 5. Build Docker
 - Chemin du Dockerfile : `MyService/Dockerfile`
@@ -38,7 +38,7 @@ Le cadre de la gestion de projet demandé est préparé pour GitLab :
   - `docker push issou7756/devops-cloudnative:latest`
 
 ## 8. Pull Request
-Une Pull Request a été créée depuis la branche `newcarservice` vers `main`. Elle permet de valider la modification en revue de code et d’assurer que la mise à jour est testée avant fusion.
+Une Pull Request a été créée depuis la branche `newcarservice-docs` vers `main`. Elle permet de valider la modification en revue de code et d’assurer que la mise à jour est testée avant fusion.
 
 ## 9. CI/CD GitHub Actions
 Le workflow GitHub Actions est présent dans `.github/workflows/action.yml`.

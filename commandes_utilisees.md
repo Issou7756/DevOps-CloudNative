@@ -6,10 +6,10 @@
 - `git remote add origin https://github.com/Issou7756/DevOps-CloudNative.git`
 - `git branch -M main`
 - `git push -u origin main`
-- `git checkout -b newcarservice`
+- `git checkout -b newcarservice-docs`
 - `git add .`
 - `git commit -m "Ajout de la documentation et préparation du devoir"`
-- `git push -u origin newcarservice`
+- `git push -u origin newcarservice-docs`
 - `git pull origin main`
 
 ## Docker

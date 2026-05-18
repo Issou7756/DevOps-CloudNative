@@ -26,7 +26,7 @@
 - **Issue 4 : Publier l’image sur Docker Hub**
   - Description : taguer l’image Docker et la pousser sur Docker Hub sous le compte `issou7756`.
 
-- **Issue 5 : Créer la branche `newcarservice` et la Pull Request**
+- **Issue 5 : Créer la branche `newcarservice-docs` et la Pull Request**
   - Description : créer une branche dédiée, pousser les changements, ouvrir une PR vers `main`.
 
 - **Issue 6 : Activer GitHub Actions et vérifier les tests**
