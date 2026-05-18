@@ -1,74 +1,67 @@
 # DevOps / Cloud Native - Projet final
 
-## Présentation du projet
-Ce dépôt contient un service Java Spring Boot adapté à un rendu DevOps / Cloud Native. Le projet a été préparé pour :
-- l’import dans un dépôt personnel GitHub ;
-- la construction d’une image Docker ;
-- l’exécution locale du service ;
-- la publication sur Docker Hub ;
-- la création d’une Pull Request ;
-- la validation via GitHub Actions.
+## Presentation du projet
 
-## Gestion de projet, DevOps et Cloud Native
-- **Gestion de projet** : piloter les tâches, créer des issues, organiser des milestones, suivre l’avancement.
-- **DevOps** : automatiser les builds, les tests et les déploiements, favoriser la collaboration entre développeurs et opérationnels.
-- **Cloud Native** : concevoir une application conteneurisée, indépendante de l’infrastructure, facile à déployer et à mettre à l’échelle.
+Ce depot contient un service Java Spring Boot prepare pour le rendu DevOps / Cloud Native.
+Le travail couvre la gestion de projet, GitHub, Docker, CI, GitLab, Kubernetes, Istio et Google Cloud.
 
-## Dépôt GitHub personnel
-- Repository : `https://github.com/Issou7756/DevOps-CloudNative.git`
-- Remote Git configuré : `origin https://github.com/Issou7756/DevOps-CloudNative.git`
-- Branche principale : `main`
-- Branche de travail : `newcarservice-docs`
+## Depots
 
-## Fichiers vérifiés
-- `MyService/Dockerfile` ✅
-- `.github/workflows/action.yml` ✅
-- `README.md` ✅
+- GitHub : `https://github.com/Issou7756/DevOps-CloudNative.git`
+- GitLab projet : `https://gitlab.com/Issam7756/issamk-devops`
+- Branche principale GitHub : `main`
+- Pull Request finale : `https://github.com/Issou7756/DevOps-CloudNative/pull/2`
 
-## Commandes Git utiles
-- `git clone https://github.com/Issou7756/DevOps-CloudNative.git`
-- `git remote remove origin` (si le remote doit être remplacé)
-- `git remote add origin https://github.com/Issou7756/DevOps-CloudNative.git`
-- `git branch -M main`
-- `git push -u origin main`
-- `git checkout -b newcarservice-docs`
-- `git add .`
-- `git commit -m "Ajout de la documentation et préparation du devoir"`
-- `git push -u origin newcarservice-docs`
-- `git pull origin main`
+## Etat GitHub
 
-## Commandes Docker utiles
-- `docker build -t issou7756/devops-cloudnative:latest ./MyService`
-- `docker run -p 4000:8080 issou7756/devops-cloudnative:latest`
-- `docker tag issou7756/devops-cloudnative:latest issou7756/devops-cloudnative:latest`
-- `docker push issou7756/devops-cloudnative:latest`
+- La Pull Request `newcarservice-docs` vers `main` a ete creee.
+- Les checks GitHub Actions ont reussi.
+- La Pull Request a ete mergee.
+- La branche distante `newcarservice-docs` a ete supprimee.
+- Le fichier `gitlab_board_a_faire.md` a ete ajoute sur `main`.
 
-## Preuves attendues
-- **Preuve du docker build** : la construction s’effectue sans erreur.
-- **Preuve du docker run** : l’application répond sur `http://localhost:4000` et renvoie le message `Hello`.
-- **Preuve du docker push** : l’image est publiée sur Docker Hub sous le compte `issou7756`.
+## Etat GitLab
 
-## Pull Request
-Une Pull Request a été créée depuis `newcarservice-docs` vers `main`. Elle permet de valider les changements avant fusion et de déclencher la CI/CD.
+Les elements de gestion de projet ont ete crees dans GitLab :
+
+- labels principaux : `En cours`, `Dev`, `Ops`, `Docker`, `CI-CD`, `Kubernetes`, `Documentation`, `Risque`, `Monitoring`, `Cloud`;
+- labels complementaires : `Build`, `Test`, `GitHub`, `Terraform`, `Ansible`, `Infrastructure`, `Google Cloud`, `PostgreSQL`, `Java`, `Istio`, `Kiali`, `Service Mesh`, `Agile`, `Minikube`, `CD`;
+- milestones du cours : `08/04`, `18/05`, `08/06`, `15/06`;
+- issues initiales et issues complementaires issues du support de cours;
+- board GitLab avec une liste basee sur le label `En cours`.
+
+## Commandes Docker principales
+
+```bash
+docker build -t issou7756/devops-cloudnative:latest ./MyService
+docker run -p 4000:8080 issou7756/devops-cloudnative:latest
+docker push issou7756/devops-cloudnative:latest
+```
 
 ## GitHub Actions
-Le workflow GitHub Actions se trouve dans `.github/workflows/action.yml`.
-Il réalise les étapes suivantes :
-1. checkout du code ;
-2. installation du JDK 21 ;
-3. exécution de `./gradlew test` dans `MyService` ;
-4. build Docker de l’image.
 
-## Liste des captures d’écran à fournir
-1. `git remote -v` avec le remote GitHub personnel.
-2. Arborescence du dépôt montrant `MyService/Dockerfile` et `.github/workflows/action.yml`.
-3. Sortie du `docker build` réussi.
-4. Page `http://localhost:4000` affichant `Hello`.
-5. Page Docker Hub montrant l’image publiée.
-6. Interface GitHub Pull Request ouverte.
-7. Interface GitHub Actions avec le statut des checks.
-8. Matrice des risques.
+Le workflow est dans `.github/workflows/action.yml`.
+Il execute les tests Gradle et verifie le build Docker.
 
-## Conclusion
-Le dépôt est structuré et prêt pour un rendu de niveau M2I. La documentation du projet est complétée, la matrice des risques est créée, et les fichiers de synthèse sont disponibles. Il reste à finaliser la création d’issues et de milestones dans GitLab si nécessaire, et à vérifier les checks GitHub Actions depuis l’interface GitHub si la CLI n’est pas installée.
-    
+## Documents de rendu
+
+- `commandes_utilisees.md`
+- `gitlab_issues_milestones.md`
+- `gitlab_board_a_faire.md`
+- `matrice_des_risques.md`
+- `rendu_professeur.md`
+- `suivi_consigne_cours.md`
+
+## Captures d'ecran a fournir
+
+1. Depot GitHub sur `main`.
+2. Pull Request GitHub mergee.
+3. GitHub Actions en succes.
+4. Docker build reussi.
+5. Application lancee localement.
+6. Docker Hub si l'image est publiee.
+7. Labels GitLab.
+8. Milestones GitLab.
+9. Issues GitLab.
+10. Issue board GitLab avec `Open`, `En cours`, `Closed`.
+11. Matrice des risques.

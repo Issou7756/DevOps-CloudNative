@@ -1,45 +1,78 @@
 # Plan GitLab : issues, milestones et board
 
-## Milestones
-1. **Sprint 1 - Import et analyse**
-   - Objectif : récupérer le projet existant et analyser le code.
-   - Livrables : dépôt GitHub configuré, README initial, Dockerfile identifié.
+Projet GitLab : `https://gitlab.com/Issam7756/issamk-devops`
 
-2. **Sprint 2 - Docker et tests**
-   - Objectif : construire l’image Docker, lancer l’application localement et vérifier les tests.
-   - Livrables : image Docker locale, application accessible sur `localhost`, preuves de build.
+## Labels principaux
 
-3. **Sprint 3 - CI/CD et documentation**
-   - Objectif : créer la Pull Request, activer GitHub Actions et finaliser la documentation.
-   - Livrables : PR ouverte, workflow GitHub Actions, rapport final.
+- En cours
+- Dev
+- Ops
+- Docker
+- CI-CD
+- Kubernetes
+- Documentation
+- Risque
+- Monitoring
+- Cloud
 
-## Issues recommandées
-- **Issue 1 : Importer le projet rent**
-  - Description : cloner le dépôt source, copier le projet dans le dépôt GitHub personnel et vérifier l’arborescence.
+## Labels complementaires
 
-- **Issue 2 : Vérifier le Dockerfile et builder l’image**
-  - Description : valider `MyService/Dockerfile`, construire l’image Docker, noter les commandes.
+- Build
+- Test
+- GitHub
+- Terraform
+- Ansible
+- Infrastructure
+- Google Cloud
+- PostgreSQL
+- Java
+- Istio
+- Kiali
+- Service Mesh
+- Agile
+- Minikube
+- CD
 
-- **Issue 3 : Tester l’application localement**
-  - Description : lancer le conteneur Docker, vérifier l’accès sur `http://localhost:4000`, tester la réponse `Hello`.
+## Milestones du cours
 
-- **Issue 4 : Publier l’image sur Docker Hub**
-  - Description : taguer l’image Docker et la pousser sur Docker Hub sous le compte `issou7756`.
+- 08/04 - Gestion de projet / Git
+- 18/05 - Docker / CI-CD
+- 08/06 - Kubernetes / Istio
+- 15/06 - Google Cloud / Rendu final
 
-- **Issue 5 : Créer la branche `newcarservice-docs` et la Pull Request**
-  - Description : créer une branche dédiée, pousser les changements, ouvrir une PR vers `main`.
+## Issues initiales creees
 
-- **Issue 6 : Activer GitHub Actions et vérifier les tests**
-  - Description : s’assurer que le workflow GitHub Actions est présent et exécuter `./gradlew test` sur `MyService`.
+- DEV-01 a DEV-05
+- DOCKER-01 a DOCKER-05
+- CI-01 a CI-02
+- KUBE-01 a KUBE-03
+- ISTIO-01 a ISTIO-02
+- MON-01
+- GCP-01
+- DOC-01 a DOC-03
 
-- **Issue 7 : Rédiger le rendu final et la matrice des risques**
-  - Description : préparer les documents finaux pour le professeur, incluant la matrice des risques et le rapport.
+## Issues complementaires creees depuis le support de cours
 
-## Board GitLab recommandé
-- Colonne `Open` : issues créées et prêtes à traiter.
-- Colonne `In Progress` : issues en cours de travail.
-- Colonne `Closed` : issues terminées.
+- GP-01 a GP-03 : organisation GitLab et gestion de projet.
+- GIT-01 a GIT-05 : installation Git, clonage, remote, lien GitHub.
+- AGILE-01 : travail en binome.
+- BUILD-01 : creation d'une version executable.
+- TEST-01 : programme de test.
+- DOCKER-06 a DOCKER-07 : Dockerfile multi-stage et tag Docker Hub.
+- CI-03 a CI-05 : workflow CI et tests avant merge.
+- KUBE-04 a KUBE-09 : kubectl, YAML, deployment, service, Minikube.
+- JAVA-01 a JAVA-04 : JDK 17, projet Java, image Docker, Docker Hub.
+- ISTIO-03 a ISTIO-05 : Gateway, VirtualService, ingressgateway.
+- MON-02 : Kiali.
+- DB-01 : besoin PostgreSQL.
+- SM-01 : Service Mesh.
+- GCP-02 a GCP-05 : Google Cloud, machine, reseau, Terraform.
+- INFRA-01 : Terraform / Ansible.
+- CD-01 a CD-03 : deploiement continu Kubernetes.
 
-## Remarques
-- Les issues doivent être liées aux milestones correspondantes.
-- Chaque issue peut contenir des sous-tâches pour Git, Docker, CI/CD et documentation.
+## Board GitLab
+
+Le board GitLab contient une liste basee sur le label `En cours`.
+Les colonnes `Open` et `Closed` sont les colonnes natives de GitLab.
+
+Si l'interface ne les affiche pas, verifier dans `Plan > Issue boards` que les listes par defaut ne sont pas masquees.
