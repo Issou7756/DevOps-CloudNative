@@ -1,8 +1,12 @@
-# Plan GitLab : issues, milestones et board
+# Suivi GitLab
 
-Projet GitLab : `https://gitlab.com/Issam7756/issamk-devops`
+Projet GitLab : https://gitlab.com/Issam7756/issamk-devops
 
-## Labels principaux
+Ce fichier résume l'organisation du projet dans GitLab.
+
+## Labels
+
+Labels principaux :
 
 - En cours
 - Dev
@@ -15,7 +19,7 @@ Projet GitLab : `https://gitlab.com/Issam7756/issamk-devops`
 - Monitoring
 - Cloud
 
-## Labels complementaires
+Labels techniques :
 
 - Build
 - Test
@@ -33,65 +37,38 @@ Projet GitLab : `https://gitlab.com/Issam7756/issamk-devops`
 - Minikube
 - CD
 
-## Milestones du cours
+## Milestones
 
-- 08/04 - Gestion de projet / Git
-- 18/05 - Docker / CI-CD
-- 08/06 - Kubernetes / Istio
-- 15/06 - Google Cloud / Rendu final
+Les milestones correspondent aux dates du cours :
 
-## Issues initiales creees
+- 08/04 : gestion de projet et Git ;
+- 18/05 : Docker et CI ;
+- 08/06 : Kubernetes et Istio ;
+- 15/06 : Google Cloud et rendu final.
 
-- DEV-01 a DEV-05
-- DOCKER-01 a DOCKER-05
-- CI-01 a CI-02
-- KUBE-01 a KUBE-03
-- ISTIO-01 a ISTIO-02
-- MON-01
-- GCP-01
-- DOC-01 a DOC-03
+## Issues
 
-## Issues complementaires creees depuis le support de cours
+Les issues GitLab suivent les étapes du projet :
 
-- GP-01 a GP-03 : organisation GitLab et gestion de projet.
-- GIT-01 a GIT-05 : installation Git, clonage, remote, lien GitHub.
-- AGILE-01 : travail en binome.
-- BUILD-01 : creation d'une version executable.
-- TEST-01 : programme de test.
-- DOCKER-06 a DOCKER-07 : Dockerfile multi-stage et tag Docker Hub.
-- CI-03 a CI-05 : workflow CI et tests avant merge.
-- KUBE-04 a KUBE-09 : kubectl, YAML, deployment, service, Minikube.
-- JAVA-01 a JAVA-04 : JDK 17, projet Java, image Docker, Docker Hub.
-- ISTIO-03 a ISTIO-05 : Gateway, VirtualService, ingressgateway.
-- MON-02 : Kiali.
-- DB-01 : besoin PostgreSQL.
-- SM-01 : Service Mesh.
-- GCP-02 a GCP-05 : Google Cloud, machine, reseau, Terraform.
-- INFRA-01 : Terraform / Ansible.
-- CD-01 a CD-03 : deploiement continu Kubernetes.
+- développement Java ;
+- tests ;
+- build de l'application ;
+- build et publication Docker ;
+- intégration continue ;
+- déploiement Kubernetes ;
+- configuration Istio ;
+- monitoring avec Kiali ;
+- matrice des risques ;
+- partie Google Cloud.
 
-## Board GitLab
+## Board
 
-Le board GitLab contient une liste basee sur le label `En cours`.
-Les colonnes `Open` et `Closed` sont les colonnes natives de GitLab.
+Le board GitLab sert au suivi de l'avancement.
 
-Si l'interface ne les affiche pas, verifier dans `Plan > Issue boards` que les listes par defaut ne sont pas masquees.
+Les colonnes attendues sont :
 
-## Nettoyage des doublons build
+- Open ;
+- En cours ;
+- Closed.
 
-Des doublons ont ete constates sur le build entre `En cours` et `Closed`.
-Correction effectuee :
-
-- `BUILD-01` reste l'issue canonique du build executable.
-- L'issue `#9 build` a ete commentee comme doublon de `BUILD-01`.
-- Le label `En cours` a ete retire de `#9`.
-- L'issue `#9` a ete fermee.
-- La capture finale du board doit montrer `Open`, `En cours` et `Closed` sans issue build dupliquee.
-
-Tentative de controle local :
-
-```bash
-glab auth status
-```
-
-Resultat : authentification valide et nettoyage distant effectue avec `glab`.
+La capture du board GitLab est à joindre au rendu.

@@ -1,85 +1,98 @@
-# Rendu final pour le professeur
+# Rendu DevOps / Cloud Native
 
-## 1. Contexte
+## Présentation
 
-Le projet reprend un service Java Spring Boot du depot `rent`.
-L'objectif du devoir est de montrer une demarche DevOps / Cloud Native : gestion de projet, Git, Docker, CI, Kubernetes, Istio, monitoring et ouverture vers Google Cloud.
+Ce projet a été réalisé dans le cadre du cours DevOps / Cloud Native.
 
-## 2. Gestion de projet GitLab
+Il s'agit d'une application Java Spring Boot, préparée pour être construite avec Docker, testée avec GitHub Actions, puis déployée localement avec Kubernetes et Istio.
 
-Projet GitLab : `https://gitlab.com/Issam7756/issamk-devops`
+## Liens du projet
 
-Les elements suivants ont ete prepares :
+- GitHub : https://github.com/Issou7756/DevOps-CloudNative
+- GitLab : https://gitlab.com/Issam7756/issamk-devops
+- DockerHub : https://hub.docker.com/r/issou7756/devops-cloudnative
 
-- labels de suivi et labels techniques;
-- milestones correspondant aux quatre dates du cours;
-- issues initiales du rendu;
-- issues complementaires extraites du support de cours;
-- issue board avec la colonne `En cours`.
+Image Docker utilisée :
 
-Point de controle du board : des doublons ont ete constates sur les issues de build entre `En cours` et `Closed`.
-La correction a ete faite : `BUILD-01` reste l'issue canonique, l'issue `#9 build` a ete commentee comme doublon, le label `En cours` a ete retire, puis l'issue a ete fermee.
-La capture finale du board doit confirmer que les colonnes `Open`, `En cours` et `Closed` ne presentent plus ce doublon.
+```text
+issou7756/devops-cloudnative:latest
+```
 
-Le fichier `gitlab_issues_milestones.md` recapitule la structure.
-Le fichier `suivi_consigne_cours.md` liste les consignes couvertes et celles qui restent a demontrer par capture ou execution locale.
+## Travail réalisé
 
-## 3. GitHub
+### Gestion de projet
 
-- Depot personnel : `https://github.com/Issou7756/DevOps-CloudNative.git`
-- Branche cible : `main`
-- Pull Request finale : `https://github.com/Issou7756/DevOps-CloudNative/pull/2`
-- Statut : Pull Request mergee apres succes des checks GitHub Actions.
+Le suivi du projet est fait sur GitLab.
 
-## 4. Docker
+Le projet contient les issues, les labels, les milestones et le board demandés dans le cours. Une matrice des risques est aussi disponible dans le dépôt.
 
-Dockerfile : `MyService/Dockerfile`
+### Développement et GitHub
+
+Le code est publié sur GitHub dans le dépôt personnel du projet.
+
+Une branche de travail a été utilisée, puis une Pull Request a été ouverte et mergée après validation de la CI.
+
+### Docker
+
+L'application peut être construite sous forme d'image Docker.
 
 Commandes principales :
 
 ```bash
 docker build -t issou7756/devops-cloudnative:latest ./MyService
 docker run -p 4000:8080 issou7756/devops-cloudnative:latest
-docker push issou7756/devops-cloudnative:latest
 ```
 
-## 5. CI GitHub Actions
+L'image a été publiée sur DockerHub.
 
-Le workflow GitHub Actions est present dans `.github/workflows/action.yml`.
-Il verifie les tests Gradle et le build Docker.
-Le dernier controle de Pull Request etait en succes avant merge.
+### Intégration continue
 
-## 6. Kubernetes, Istio et Google Cloud
+Le workflow GitHub Actions se trouve dans :
 
-Les consignes correspondantes sont tracees dans GitLab, les manifests attendus ont ete ajoutes au depot et l'execution locale a ete validee avec Minikube :
+```text
+.github/workflows/action.yml
+```
 
-- demarrage Minikube avec le profil `devops-cloudnative` et le driver Docker;
-- fichiers YAML Kubernetes Deployment et Service dans `k8s/`;
-- deploiement local avec `kubectl apply -f k8s/` et pod `carservice` en etat `Running`;
-- test Kubernetes via port-forward `http://localhost:4001/` retournant `Hello`;
-- installation Istio via les addons Minikube `istio-provisioner` et `istio`;
-- Gateway et VirtualService dans `istio/`;
-- test via `istio-ingressgateway` avec `http://localhost:31380/carservice`, reponse `Hello` servie par `istio-envoy`;
-- monitoring avec Kiali, accessible via `http://localhost:20001/kiali/`;
-- preparation Google Cloud, reseau, Terraform et Ansible.
+Il lance les tests Gradle et vérifie le build Docker.
 
-## 7. Matrice des risques
+### Kubernetes
 
-La matrice des risques est fournie dans `matrice_des_risques.md`.
+Les fichiers Kubernetes sont placés dans le dossier `k8s/`.
 
-## 8. Captures d'ecran a fournir
+Ils permettent de déployer l'application avec :
 
-- GitHub : depot, PR mergee, checks GitHub Actions en succes.
-- Docker : build reussi, conteneur lance, application accessible.
-- GitLab : labels, milestones, issues, board sans doublon entre `En cours` et `Closed`.
-- Kubernetes : `minikube start`, `kubectl apply -f k8s/`, pod `carservice` en `Running`, URL locale `http://localhost:4001/`.
-- Istio : gateway, virtual service, port-forward, URL `http://localhost:31380/carservice`.
-- Kiali : dashboard de monitoring accessible sur `http://localhost:20001/kiali/`.
-- Google Cloud : console ou lab realise.
-- Matrice des risques.
+```bash
+kubectl apply -f k8s/
+```
 
-## 9. Conclusion
+Le service peut ensuite être testé localement avec un port-forward.
 
-Le rendu couvre la partie GitHub, Docker, CI et gestion de projet GitLab.
-Les consignes Kubernetes et Istio sont maintenant materialisees par des manifests YAML dans le depot.
-Les autres consignes du cours sont tracees sous forme d'issues et de checklist afin de pouvoir les suivre et les prouver par captures d'ecran.
+### Istio et Kiali
+
+Les fichiers Istio sont placés dans le dossier `istio/`.
+
+Ils ajoutent une Gateway et un VirtualService pour accéder au service avec le chemin `/carservice`.
+
+Kiali est utilisé pour visualiser le service mesh.
+
+### Google Cloud
+
+La partie Google Cloud est à illustrer avec les captures du lab ou de la console, selon ce qui est demandé dans le support de cours.
+
+## Captures à fournir
+
+- dépôt GitHub avec les dossiers `k8s/` et `istio/` ;
+- Pull Request GitHub mergée ;
+- workflow GitHub Actions en succès ;
+- image DockerHub publiée ;
+- application lancée avec Docker ;
+- projet GitLab avec issues, labels, milestones et board ;
+- déploiement Kubernetes ;
+- test Istio sur `/carservice` ;
+- interface Kiali ;
+- matrice des risques ;
+- capture Google Cloud si demandée.
+
+## Conclusion
+
+Le projet regroupe les éléments principaux attendus pour le rendu : gestion de projet, dépôt GitHub, CI, Docker, Kubernetes, Istio, Kiali et suivi des risques.

@@ -9,8 +9,8 @@
 | échec du docker push | Image non publiée sur Docker Hub | Moyen | Élevé | Vérifier l’authentification Docker Hub avec `docker login` et le nom du tag | Ouvert |
 | mauvais remote Git | Push vers le mauvais dépôt | Faible | Critique | Vérifier `git remote -v` et corriger avec `git remote set-url origin ...` | Ouvert |
 | secrets poussés par erreur | Fuite de clés ou données sensibles | Faible | Critique | Ne pas committer de secrets ; utiliser `.gitignore` et variables d’environnement | Ouvert |
-| tests GitHub Actions en échec | Merge bloqué, livraison retardée | Moyen | Élevé | Corriger les tests, analyser les logs GitHub Actions, relancer | Ouvert |
+| tests GitHub Actions en échec | Merge retardé, livraison repoussée | Moyen | Élevé | Corriger les tests, analyser les logs GitHub Actions, relancer | Ouvert |
 | erreur de branche ou conflit de merge | Merge non appliqué, travail interrompu | Moyen | Élevé | Faire `git pull origin main` avant push ; résoudre les conflits localement | Ouvert |
 | Minikube non démarré | Environnement Kubernetes non disponible | Moyen | Moyen | Démarrer Minikube avec `minikube start` avant les déploiements | Ouvert |
-| erreur YAML Kubernetes | Manifeste invalide, déploiement bloqué | Faible | Élevé | Valider le YAML avec `kubectl apply --dry-run=client -f` | Ouvert |
+| erreur YAML Kubernetes | Manifeste invalide, déploiement impossible | Faible | Élevé | Valider le YAML avec `kubectl apply --dry-run=client -f` | Ouvert |
 | Istio / Kiali non accessibles | Observabilité et service mesh indisponibles | Faible | Moyen | Vérifier l’état des services Istio/Kiali et accéder via `minikube service` | Ouvert |

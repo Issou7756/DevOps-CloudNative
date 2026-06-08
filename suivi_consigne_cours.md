@@ -1,70 +1,64 @@
-# Suivi des consignes du cours
+# Suivi des consignes
 
-Ce fichier reprend les consignes du support de cours et indique comment elles sont couvertes dans le rendu.
+Ce tableau résume l'avancement du rendu par rapport aux consignes du cours.
 
 ## Gestion de projet
 
-| Consigne | Etat | Preuve attendue |
+| Consigne | État | Preuve |
 | --- | --- | --- |
-| Creer un projet GitLab | Fait | Capture du projet GitLab |
-| Creer les issues | Fait | Capture de la liste des issues |
-| Creer 4 milestones | Fait | Capture des milestones |
-| Associer issues et milestones | Fait | Capture d'une issue avec milestone |
-| Ajouter le label En cours | Fait | Capture des labels |
-| Verifier le board Open / En cours / Closed | Nettoyage des doublons build fait ; capture a prendre | Capture du board |
-| Etablir la matrice des risques | Fait | `matrice_des_risques.md` |
+| Créer le projet GitLab | Fait | Page GitLab |
+| Créer les issues | Fait | Liste des issues |
+| Créer les milestones | Fait | Liste des milestones |
+| Utiliser les labels | Fait | Liste des labels |
+| Utiliser le board | Fait | Capture du board |
+| Faire la matrice des risques | Fait | `matrice_des_risques.md` |
 
 ## Git et GitHub
 
-| Consigne | Etat | Preuve attendue |
+| Consigne | État | Preuve |
 | --- | --- | --- |
-| Verifier Git | A capturer | `git --version` |
-| Cloner le projet source | Trace | Historique / arborescence |
-| Creer le depot GitHub personnel | Fait | Page GitHub |
-| Configurer le remote | Fait | `git remote -v` |
-| Creer une branche de travail | Fait | PR GitHub |
-| Ouvrir une Pull Request | Fait | PR #2 |
-| Verifier les checks | Fait | GitHub Actions en succes |
-| Merger la Pull Request | Fait | PR mergee |
+| Créer le dépôt GitHub personnel | Fait | Dépôt GitHub |
+| Utiliser une branche de travail | Fait | Pull Request |
+| Ouvrir une Pull Request | Fait | PR GitHub |
+| Vérifier les checks | Fait | GitHub Actions |
+| Merger la Pull Request | Fait | PR mergée |
 
 ## Docker et CI
 
-| Consigne | Etat | Preuve attendue |
+| Consigne | État | Preuve |
 | --- | --- | --- |
-| Verifier Docker Desktop | Fait | `docker --version` et `docker info` |
-| Builder l'image Docker | Fait | `docker build` en succes |
-| Lancer le conteneur | Fait | `docker run` sur le port `4000` |
-| Tester dans le navigateur | Fait en ligne de commande, capture navigateur a prendre | `http://localhost:4000/` retourne `Hello` |
-| Publier sur Docker Hub | A confirmer par capture | Page Docker Hub |
-| Executer la CI GitHub Actions | Fait | Workflow en succes |
+| Créer le Dockerfile | Fait | `MyService/Dockerfile` |
+| Builder l'image Docker | Fait | Capture de la commande |
+| Lancer le conteneur | Fait | Application sur `localhost:4000` |
+| Publier l'image sur DockerHub | Fait | Page DockerHub |
+| Créer la CI GitHub Actions | Fait | `.github/workflows/action.yml` |
+| Valider la CI | Fait | Workflow en succès |
 
 ## Kubernetes et Istio
 
-| Consigne | Etat | Preuve attendue |
+| Consigne | État | Preuve |
 | --- | --- | --- |
-| Verifier Minikube | Fait | `minikube version` : v1.38.1 |
-| Demarrer Minikube | Fait | Profil `devops-cloudnative` avec driver Docker |
-| Creer YAML Deployment | Fait | `k8s/deployment.yaml` |
-| Creer YAML Service | Fait | `k8s/service.yaml` |
-| Deployer avec kubectl | Fait | `kubectl apply -f k8s/` |
-| Tester via minikube service | Fait via port-forward | `http://localhost:4001/` retourne `Hello` |
-| Installer Istio | Fait via addons Minikube | `istio` et `istio-provisioner` actives |
-| Configurer Gateway / VirtualService | Fait | `istio/gateway.yaml` et `istio/virtualservice.yaml` |
-| Tester via port-forward | Fait | `localhost:31380/carservice` retourne `Hello` via `istio-envoy` |
-| Verifier Kiali | Fait | `http://localhost:20001/kiali/` retourne `200 OK` |
+| Installer ou vérifier Minikube | Fait | Commande `minikube version` |
+| Créer le Deployment | Fait | `k8s/deployment.yaml` |
+| Créer le Service | Fait | `k8s/service.yaml` |
+| Déployer avec kubectl | Fait | `kubectl apply -f k8s/` |
+| Tester le service localement | Fait | `localhost:4001` |
+| Installer Istio | Fait | Addons Minikube |
+| Créer Gateway et VirtualService | Fait | Dossier `istio/` |
+| Tester le routage Istio | Fait | `localhost:31380/carservice` |
+| Vérifier Kiali | Fait | Dashboard Kiali |
 
-## Google Cloud et infrastructure
+## Google Cloud
 
-| Consigne | Etat | Preuve attendue |
+| Consigne | État | Preuve |
 | --- | --- | --- |
-| Decouvrir Google Cloud | A faire dans le lab | Capture Cloud Skills Boost |
-| Reserver une machine | A faire dans le lab | Capture VM |
-| Configurer le reseau | A faire dans le lab | Capture VPC / firewall |
-| Etudier Terraform | Trace dans GitLab | Issue GCP-05 |
-| Preparer Terraform / Ansible | Trace dans GitLab | Issue INFRA-01 |
+| Ouvrir le lab Google Cloud | À faire dans le lab | Capture du lab |
+| Créer ou réserver une machine | À faire dans le lab | Capture VM |
+| Vérifier le réseau ou le firewall | À faire dans le lab | Capture console |
+| Voir Terraform / Ansible | À capturer | Commandes ou notes du lab |
 
-## Ce qui reste vraiment manuel
+## Reste à faire
 
-- Capturer les ecrans demandes.
-- Executer ou capturer les parties Google Cloud si elles ne sont pas deja faites.
-- Prendre la capture du board GitLab apres retrait du label `En cours` sur l'issue `#9 build` fermee.
+- Prendre les captures finales pour le rendu.
+- Ajouter la capture Google Cloud si elle est demandée.
+- Vérifier une dernière fois que les liens GitHub, GitLab et DockerHub sont bien renseignés dans le tableau du cours.
