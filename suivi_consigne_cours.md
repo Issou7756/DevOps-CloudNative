@@ -11,7 +11,7 @@ Ce fichier reprend les consignes du support de cours et indique comment elles so
 | Creer 4 milestones | Fait | Capture des milestones |
 | Associer issues et milestones | Fait | Capture d'une issue avec milestone |
 | Ajouter le label En cours | Fait | Capture des labels |
-| Verifier le board Open / En cours / Closed | A verifier dans l'interface | Capture du board |
+| Verifier le board Open / En cours / Closed | Nettoyage des doublons build fait ; capture a prendre | Capture du board |
 | Etablir la matrice des risques | Fait | `matrice_des_risques.md` |
 
 ## Git et GitHub
@@ -31,10 +31,10 @@ Ce fichier reprend les consignes du support de cours et indique comment elles so
 
 | Consigne | Etat | Preuve attendue |
 | --- | --- | --- |
-| Verifier Docker Desktop | A capturer | `docker --version` ou Docker Desktop |
-| Builder l'image Docker | Verifie precedemment | Sortie `docker build` |
-| Lancer le conteneur | A capturer | `docker run` |
-| Tester dans le navigateur | A capturer | Page locale |
+| Verifier Docker Desktop | Fait | `docker --version` et `docker info` |
+| Builder l'image Docker | Fait | `docker build` en succes |
+| Lancer le conteneur | Fait | `docker run` sur le port `4000` |
+| Tester dans le navigateur | Fait en ligne de commande, capture navigateur a prendre | `http://localhost:4000/` retourne `Hello` |
 | Publier sur Docker Hub | A confirmer par capture | Page Docker Hub |
 | Executer la CI GitHub Actions | Fait | Workflow en succes |
 
@@ -42,14 +42,14 @@ Ce fichier reprend les consignes du support de cours et indique comment elles so
 
 | Consigne | Etat | Preuve attendue |
 | --- | --- | --- |
-| Verifier Minikube | A faire localement | `minikube version` |
+| Verifier Minikube | A installer ou ajouter au PATH | `minikube version` |
 | Demarrer Minikube | A faire localement | `minikube start` |
-| Creer YAML Deployment | A faire si demande | Fichier dans `k8s/` |
-| Creer YAML Service | A faire si demande | Fichier dans `k8s/` |
-| Deployer avec kubectl | A faire localement | `kubectl apply -f ...` |
+| Creer YAML Deployment | Fait | `k8s/deployment.yaml` |
+| Creer YAML Service | Fait | `k8s/service.yaml` |
+| Deployer avec kubectl | A faire localement | `kubectl apply -f k8s/` |
 | Tester via minikube service | A faire localement | URL fournie par Minikube |
-| Installer Istio | A faire localement | `istioctl version` |
-| Configurer Gateway / VirtualService | A faire si demande | YAML Istio |
+| Installer Istio | A installer ou ajouter au PATH | `istioctl version` |
+| Configurer Gateway / VirtualService | Fait | `istio/gateway.yaml` et `istio/virtualservice.yaml` |
 | Tester via port-forward | A faire localement | `localhost:31380/carservice` |
 | Verifier Kiali | A faire localement | Dashboard Kiali |
 
@@ -67,4 +67,4 @@ Ce fichier reprend les consignes du support de cours et indique comment elles so
 
 - Capturer les ecrans demandes.
 - Executer les parties qui dependent de Docker Desktop, Minikube, Istio, Kiali et Google Cloud si elles ne sont pas deja faites sur la machine.
-- Ajouter des fichiers YAML Kubernetes/Istio dans le repo si le professeur demande une preuve par fichier et pas seulement par suivi GitLab.
+- Prendre la capture du board GitLab apres retrait du label `En cours` sur l'issue `#9 build` fermee.

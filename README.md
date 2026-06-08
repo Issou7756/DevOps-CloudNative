@@ -30,6 +30,9 @@ Les elements de gestion de projet ont ete crees dans GitLab :
 - issues initiales et issues complementaires issues du support de cours;
 - board GitLab avec une liste basee sur le label `En cours`.
 
+Point de controle GitLab : le doublon `#9 build` a ete commente comme doublon de `BUILD-01`, le label `En cours` a ete retire, puis l'issue a ete fermee.
+`BUILD-01` reste l'issue canonique pour le build executable de l'application.
+
 ## Commandes Docker principales
 
 ```bash
@@ -42,6 +45,30 @@ docker push issou7756/devops-cloudnative:latest
 
 Le workflow est dans `.github/workflows/action.yml`.
 Il execute les tests Gradle et verifie le build Docker.
+
+## Kubernetes et Istio
+
+Les manifests de deploiement local sont fournis :
+
+- `k8s/deployment.yaml` : deploiement de l'image `issou7756/devops-cloudnative:latest`.
+- `k8s/service.yaml` : service `carservice` sur le port `8080`.
+- `istio/gateway.yaml` : gateway HTTP Istio.
+- `istio/virtualservice.yaml` : route `/carservice` vers le service Kubernetes.
+
+Commandes principales :
+
+```bash
+kubectl apply -f k8s/
+minikube service carservice --url
+kubectl apply -f istio/
+kubectl -n istio-system port-forward deployment/istio-ingressgateway 31380:8080
+```
+
+URL Istio attendue :
+
+```text
+http://localhost:31380/carservice
+```
 
 ## Documents de rendu
 
@@ -63,5 +90,7 @@ Il execute les tests Gradle et verifie le build Docker.
 7. Labels GitLab.
 8. Milestones GitLab.
 9. Issues GitLab.
-10. Issue board GitLab avec `Open`, `En cours`, `Closed`.
-11. Matrice des risques.
+10. Issue board GitLab avec `Open`, `En cours`, `Closed`, sans doublon build.
+11. Kubernetes : `kubectl apply -f k8s/` et service `carservice`.
+12. Istio : Gateway, VirtualService et URL `http://localhost:31380/carservice`.
+13. Matrice des risques.

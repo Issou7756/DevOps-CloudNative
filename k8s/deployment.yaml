@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: carservice
+  labels:
+    app: carservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: carservice
+  template:
+    metadata:
+      labels:
+        app: carservice
+    spec:
+      containers:
+        - name: myservice
+          image: issou7756/devops-cloudnative:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080

@@ -32,9 +32,19 @@ Dans cet environnement, `gh` n'etait pas installe. La Pull Request a donc ete fi
 ```bash
 glab --version
 glab auth status
+glab issue list -R Issam7756/issamk-devops --all --search build --in title,description
 ```
 
-Dans cet environnement, `glab` n'etait pas installe. Les labels, milestones et issues ont ete crees via l'API GitLab avec un token en variable d'environnement.
+`glab` est installe et le nettoyage des doublons GitLab a ete fait avec `glab` :
+
+```bash
+glab issue note 9 -R Issam7756/issamk-devops --message "Doublon de BUILD-01. L'issue BUILD-01 devient l'issue canonique pour le build executable de l'application."
+glab issue update 9 -R Issam7756/issamk-devops --unlabel "En cours"
+glab issue close 9 -R Issam7756/issamk-devops
+glab issue list -R Issam7756/issamk-devops --all --label "En cours" --output json --per-page 100
+```
+
+Resultat : l'issue `#9 build` est fermee sans label `En cours`; `BUILD-01` reste l'issue canonique.
 
 ## Docker
 
@@ -60,6 +70,28 @@ cd MyService
 .\gradlew.bat test
 ```
 
+Verification locale actuelle :
+
+```text
+java -version -> 1.8.0_361
+```
+
+Le projet et la CI utilisent JDK 21. Les tests Gradle locaux doivent donc etre relances apres installation ou activation d'un JDK 21 dans le PATH.
+
+## Etat local des outils
+
+```text
+docker --version -> Docker version 29.4.3
+docker info -> serveur Docker 29.4.3 accessible
+docker build -t issou7756/devops-cloudnative:latest ./MyService -> succes
+docker run --rm -d --name devops-cloudnative-test -p 4000:8080 issou7756/devops-cloudnative:latest -> conteneur demarre
+Invoke-WebRequest http://localhost:4000/ -> 200 Hello
+kubectl config current-context -> myAKSCluster
+kubectl apply --dry-run=client -> bloque par l'ancien endpoint AKS inaccessible
+minikube version -> commande introuvable
+istioctl version -> commande introuvable
+```
+
 ## Kubernetes local
 
 ```bash
@@ -67,9 +99,10 @@ minikube version
 minikube start
 kubectl version --client
 kubectl apply -f k8s/
+kubectl get deployment carservice
 kubectl get pods
-kubectl get services
-minikube service nom-du-service --url
+kubectl get service carservice
+minikube service carservice --url
 ```
 
 ## Istio

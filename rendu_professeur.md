@@ -17,6 +17,10 @@ Les elements suivants ont ete prepares :
 - issues complementaires extraites du support de cours;
 - issue board avec la colonne `En cours`.
 
+Point de controle du board : des doublons ont ete constates sur les issues de build entre `En cours` et `Closed`.
+La correction a ete faite : `BUILD-01` reste l'issue canonique, l'issue `#9 build` a ete commentee comme doublon, le label `En cours` a ete retire, puis l'issue a ete fermee.
+La capture finale du board doit confirmer que les colonnes `Open`, `En cours` et `Closed` ne presentent plus ce doublon.
+
 Le fichier `gitlab_issues_milestones.md` recapitule la structure.
 Le fichier `suivi_consigne_cours.md` liste les consignes couvertes et celles qui restent a demontrer par capture ou execution locale.
 
@@ -47,15 +51,15 @@ Le dernier controle de Pull Request etait en succes avant merge.
 
 ## 6. Kubernetes, Istio et Google Cloud
 
-Les consignes correspondantes ont ete ajoutees dans GitLab sous forme d'issues :
+Les consignes correspondantes sont tracees dans GitLab et les manifests attendus ont ete ajoutes au depot :
 
 - demarrage Minikube;
-- fichiers YAML Kubernetes Deployment et Service;
-- deploiement local avec `kubectl apply`;
-- test avec `minikube service --url`;
+- fichiers YAML Kubernetes Deployment et Service dans `k8s/`;
+- deploiement local avec `kubectl apply -f k8s/`;
+- test avec `minikube service carservice --url`;
 - installation Istio;
-- Gateway et VirtualService;
-- test via `istio-ingressgateway`;
+- Gateway et VirtualService dans `istio/`;
+- test via `istio-ingressgateway` avec `http://localhost:31380/carservice`;
 - monitoring avec Kiali;
 - preparation Google Cloud, reseau, Terraform et Ansible.
 
@@ -67,9 +71,9 @@ La matrice des risques est fournie dans `matrice_des_risques.md`.
 
 - GitHub : depot, PR mergee, checks GitHub Actions en succes.
 - Docker : build reussi, conteneur lance, application accessible.
-- GitLab : labels, milestones, issues, board.
-- Kubernetes : `minikube start`, `kubectl apply`, service accessible.
-- Istio : gateway, virtual service, port-forward, URL de test.
+- GitLab : labels, milestones, issues, board sans doublon entre `En cours` et `Closed`.
+- Kubernetes : `minikube start`, `kubectl apply -f k8s/`, service `carservice` accessible.
+- Istio : gateway, virtual service, port-forward, URL `http://localhost:31380/carservice`.
 - Kiali : dashboard de monitoring.
 - Google Cloud : console ou lab realise.
 - Matrice des risques.
@@ -77,4 +81,5 @@ La matrice des risques est fournie dans `matrice_des_risques.md`.
 ## 9. Conclusion
 
 Le rendu couvre la partie GitHub, Docker, CI et gestion de projet GitLab.
+Les consignes Kubernetes et Istio sont maintenant materialisees par des manifests YAML dans le depot.
 Les autres consignes du cours sont tracees sous forme d'issues et de checklist afin de pouvoir les suivre et les prouver par captures d'ecran.

@@ -76,3 +76,22 @@ Le board GitLab contient une liste basee sur le label `En cours`.
 Les colonnes `Open` et `Closed` sont les colonnes natives de GitLab.
 
 Si l'interface ne les affiche pas, verifier dans `Plan > Issue boards` que les listes par defaut ne sont pas masquees.
+
+## Nettoyage des doublons build
+
+Des doublons ont ete constates sur le build entre `En cours` et `Closed`.
+Correction effectuee :
+
+- `BUILD-01` reste l'issue canonique du build executable.
+- L'issue `#9 build` a ete commentee comme doublon de `BUILD-01`.
+- Le label `En cours` a ete retire de `#9`.
+- L'issue `#9` a ete fermee.
+- La capture finale du board doit montrer `Open`, `En cours` et `Closed` sans issue build dupliquee.
+
+Tentative de controle local :
+
+```bash
+glab auth status
+```
+
+Resultat : authentification valide et nettoyage distant effectue avec `glab`.
