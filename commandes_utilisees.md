@@ -73,10 +73,20 @@ cd MyService
 Verification locale actuelle :
 
 ```text
-java -version -> 1.8.0_361
+java -version -> 1.8.0_361 dans le PATH par defaut
+JAVA_HOME temporaire -> C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot
+java -version avec JAVA_HOME temporaire -> 21.0.11
 ```
 
-Le projet et la CI utilisent JDK 21. Les tests Gradle locaux doivent donc etre relances apres installation ou activation d'un JDK 21 dans le PATH.
+Le projet et la CI utilisent JDK 21. Les tests Gradle locaux ont ete relances avec JAVA_HOME temporaire :
+
+```powershell
+$env:JAVA_HOME='C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot'
+$env:Path="$env:JAVA_HOME\bin;$env:Path"
+.\gradlew.bat test
+```
+
+Resultat : tests en succes.
 
 ## Etat local des outils
 
@@ -86,30 +96,40 @@ docker info -> serveur Docker 29.4.3 accessible
 docker build -t issou7756/devops-cloudnative:latest ./MyService -> succes
 docker run --rm -d --name devops-cloudnative-test -p 4000:8080 issou7756/devops-cloudnative:latest -> conteneur demarre
 Invoke-WebRequest http://localhost:4000/ -> 200 Hello
-kubectl config current-context -> myAKSCluster
-kubectl apply --dry-run=client -> bloque par l'ancien endpoint AKS inaccessible
-minikube version -> commande introuvable
-istioctl version -> commande introuvable
+kubectl config current-context -> devops-cloudnative apres demarrage du nouveau profil Minikube
+ancien contexte myAKSCluster -> endpoint AKS inaccessible, non utilise pour le rendu final
+minikube version -> v1.38.1 via C:\Program Files\Kubernetes\Minikube\minikube.exe
+istioctl version -> non utilise ; Istio valide via addons Minikube
 ```
 
 ## Kubernetes local
 
 ```bash
 minikube version
-minikube start
+minikube start -p devops-cloudnative --driver=docker
 kubectl version --client
 kubectl apply -f k8s/
+kubectl rollout status deployment/carservice
 kubectl get deployment carservice
 kubectl get pods
 kubectl get service carservice
-minikube service carservice --url
+kubectl port-forward service/carservice 4001:8080
 ```
+
+Test HTTP Kubernetes :
+
+```powershell
+Invoke-WebRequest -UseBasicParsing http://localhost:4001/
+```
+
+Resultat attendu : `200 Hello`.
 
 ## Istio
 
 ```bash
-istioctl version
-istioctl install
+minikube -p devops-cloudnative addons enable istio-provisioner
+minikube -p devops-cloudnative addons enable istio
+kubectl wait --for=condition=Ready pod --all -n istio-system --timeout=240s
 kubectl apply -f istio/
 kubectl -n istio-system port-forward deployment/istio-ingressgateway 31380:8080
 ```
@@ -120,12 +140,25 @@ URL de test attendue :
 http://localhost:31380/carservice
 ```
 
+Resultat obtenu : `200 Hello` avec l'en-tete `Server: istio-envoy`.
+
 ## Kiali
 
 ```bash
 kubectl get pods -n istio-system
-istioctl dashboard kiali
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.23/samples/addons/prometheus.yaml
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.23/samples/addons/kiali.yaml
+kubectl get pods -n istio-system
+kubectl -n istio-system port-forward service/kiali 20001:20001
 ```
+
+URL de test :
+
+```text
+http://localhost:20001/kiali/
+```
+
+Resultat obtenu : `200 OK`.
 
 ## Google Cloud / infrastructure
 

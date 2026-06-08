@@ -42,16 +42,16 @@ Ce fichier reprend les consignes du support de cours et indique comment elles so
 
 | Consigne | Etat | Preuve attendue |
 | --- | --- | --- |
-| Verifier Minikube | A installer ou ajouter au PATH | `minikube version` |
-| Demarrer Minikube | A faire localement | `minikube start` |
+| Verifier Minikube | Fait | `minikube version` : v1.38.1 |
+| Demarrer Minikube | Fait | Profil `devops-cloudnative` avec driver Docker |
 | Creer YAML Deployment | Fait | `k8s/deployment.yaml` |
 | Creer YAML Service | Fait | `k8s/service.yaml` |
-| Deployer avec kubectl | A faire localement | `kubectl apply -f k8s/` |
-| Tester via minikube service | A faire localement | URL fournie par Minikube |
-| Installer Istio | A installer ou ajouter au PATH | `istioctl version` |
+| Deployer avec kubectl | Fait | `kubectl apply -f k8s/` |
+| Tester via minikube service | Fait via port-forward | `http://localhost:4001/` retourne `Hello` |
+| Installer Istio | Fait via addons Minikube | `istio` et `istio-provisioner` actives |
 | Configurer Gateway / VirtualService | Fait | `istio/gateway.yaml` et `istio/virtualservice.yaml` |
-| Tester via port-forward | A faire localement | `localhost:31380/carservice` |
-| Verifier Kiali | A faire localement | Dashboard Kiali |
+| Tester via port-forward | Fait | `localhost:31380/carservice` retourne `Hello` via `istio-envoy` |
+| Verifier Kiali | Fait | `http://localhost:20001/kiali/` retourne `200 OK` |
 
 ## Google Cloud et infrastructure
 
@@ -66,5 +66,5 @@ Ce fichier reprend les consignes du support de cours et indique comment elles so
 ## Ce qui reste vraiment manuel
 
 - Capturer les ecrans demandes.
-- Executer les parties qui dependent de Docker Desktop, Minikube, Istio, Kiali et Google Cloud si elles ne sont pas deja faites sur la machine.
+- Executer ou capturer les parties Google Cloud si elles ne sont pas deja faites.
 - Prendre la capture du board GitLab apres retrait du label `En cours` sur l'issue `#9 build` fermee.

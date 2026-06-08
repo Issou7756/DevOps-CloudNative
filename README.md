@@ -59,15 +59,17 @@ Commandes principales :
 
 ```bash
 kubectl apply -f k8s/
-minikube service carservice --url
+kubectl port-forward service/carservice 4001:8080
 kubectl apply -f istio/
 kubectl -n istio-system port-forward deployment/istio-ingressgateway 31380:8080
 ```
 
-URL Istio attendue :
+URLs validees localement :
 
 ```text
+http://localhost:4001/
 http://localhost:31380/carservice
+http://localhost:20001/kiali/
 ```
 
 ## Documents de rendu
@@ -91,6 +93,7 @@ http://localhost:31380/carservice
 8. Milestones GitLab.
 9. Issues GitLab.
 10. Issue board GitLab avec `Open`, `En cours`, `Closed`, sans doublon build.
-11. Kubernetes : `kubectl apply -f k8s/` et service `carservice`.
+11. Kubernetes : `kubectl apply -f k8s/`, pod `carservice` en `Running`, URL `http://localhost:4001/`.
 12. Istio : Gateway, VirtualService et URL `http://localhost:31380/carservice`.
-13. Matrice des risques.
+13. Kiali : dashboard `http://localhost:20001/kiali/`.
+14. Matrice des risques.
